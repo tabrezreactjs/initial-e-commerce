@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+/* Scan all legacy + App Router sources for class names */
+@source "../**/*.{js,jsx,ts,tsx}";
+@source "../app/**/*.{js,jsx,ts,tsx}";
+@source "../views/**/*.{js,jsx,ts,tsx}";
+@source "../components/**/*.{js,jsx,ts,tsx}";
+
+:root {
+
+}
+
+@theme inline {
+
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+html {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  color-scheme: light;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.5);
+  @apply ring-0! ring-offset-0!;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
