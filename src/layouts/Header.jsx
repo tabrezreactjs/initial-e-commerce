@@ -1,0 +1,67 @@
+import React from 'react'
+import Logo from '../components/common/Logo/Logo'
+import { FiLogOut, FiShoppingCart, FiUser } from 'react-icons/fi'
+import { Link, useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import Button from '../components/common/Button/Button'
+import toast from 'react-hot-toast'
+
+const Header = () => {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    console.log("Logged out Success");
+    toast.success("Logged out successfully!");
+    navigate("/login");
+  };
+
+  return (
+    <header className="w-full bg-white border-b z-50 shadow-sm sticky top-0">
+      <div className="w-full max-w-7xl flex justify-between items-center px-6 py-4 mx-auto">
+        <Logo />
+
+        <nav className="hidden items-center gap-8 md:flex">
+          <Link to="/">Home</Link>
+          <Link to="/">Products</Link>
+          <Link to="/">Categories</Link>
+        </nav>
+
+        {user ? (
+          <div className="flex items-center gap-5">
+            <Link to="/cart">
+              <FiShoppingCart size={22} />
+            </Link>
+
+            <Link to="/profile">
+              <FiUser size={22} />
+            </Link>
+
+            <FiLogOut 
+              size={22} 
+              onClick={handleLogout}
+              className='cursor-pointer' 
+            />
+          </div>
+        ) : (
+          <div className="flex items-center gap-3">
+            <Link to="/login">
+              <Button>
+                Login
+              </Button>
+            </Link>
+
+            <Link to="/signup">
+              <Button variant="secondary">
+                Signup
+              </Button>
+            </Link>
+          </div>
+        )}
+      </div>
+    </header>
+  )
+}
+
+export default Header
