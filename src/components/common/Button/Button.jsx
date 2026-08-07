@@ -8,6 +8,7 @@ export default function Button({
   size = "md",
   fullWidth = false,
   disabled = false,
+  isIconOnly = false,
   startIcon,
   endIcon,
   loading = false,
@@ -24,6 +25,7 @@ export default function Button({
           size,
           fullWidth,
           disabled,
+          isIconOnly,
         }),
         className
       )}
@@ -31,11 +33,23 @@ export default function Button({
     >
       {loading ? (
         <span>Loading...</span>
+      ) : isIconOnly ? (
+        children || startIcon || endIcon
       ) : (
         <>
-          {startIcon}
-          <span>{children}</span>
-          {endIcon}
+          {startIcon && (
+            <span className="items-center inline-flex">
+              {startIcon}
+            </span>
+          )}
+
+          {children && <span>{children}</span>}
+
+          {endIcon && (
+            <span className="items-center inline-flex">
+              {endIcon}
+            </span>
+          )}
         </>
       )}
     </button>

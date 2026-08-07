@@ -11,7 +11,21 @@
 }
 
 @theme inline {
+  --animate-loader-bar: loader-bar-animation 2s ease-in-out infinite;
 
+  @keyframes loader-bar-animation {
+    0% {
+      transform: translateX(-100%);
+    }
+
+    50% {
+      transform: translateX(100%);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 }
 
 #root,
@@ -26,12 +40,14 @@ html {
 * {
   box-sizing: border-box;
   color-scheme: light;
+  text-box: trim-both;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.5);
   @apply ring-0! ring-offset-0!;
 }
 
 body {
+  text-box: trim-both;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

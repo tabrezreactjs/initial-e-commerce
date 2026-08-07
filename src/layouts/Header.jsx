@@ -12,15 +12,15 @@ const Header = () => {
   const { user } = useAuth();
 
   return (
-    <header className="w-full bg-white border-b z-50 shadow-sm sticky top-0">
+    <header className="w-full bg-white border-b border-slate-300 z-50 shadow-sm sticky top-0">
       <div className="w-full max-w-7xl flex justify-between items-center px-6 py-4 mx-auto">
         <Logo />
 
-        <nav className="hidden items-center gap-8 md:flex">
+        {/* <nav className="hidden items-center gap-8 md:flex">
           <Link to="/">Home</Link>
           <Link to="/">Products</Link>
           <Link to="/">Categories</Link>
-        </nav>
+        </nav> */}
 
         {user ? (
           <div className="flex items-center gap-5">

@@ -9,7 +9,7 @@ const CategoryFilter = ({
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="border border-gray-300 rounded-xl outline-none px-4 py-3 focus:border-blue-500"
+      className="w-full h-11 bg-white border border-slate-300 rounded-xl text-base font-semibold leading-tight! outline-none px-4 py-2 focus:border-blue-500"
     >
       <option value="">All Categories</option>
 

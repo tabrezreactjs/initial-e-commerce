@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ImageSkeleton from "./ImageSkeleton";
 
 const FALLBACK_IMAGE = "https://placehold.co/600x600?text=No+Image";
@@ -10,7 +10,12 @@ const Image = ({
   skeletonClassName = "",
 }) => {
   const [loading, setLoading] = useState(true);
-  const [imageSrc, setImageSrc] = useState(src);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setHasError(false);
+  }, [src]);
 
   return (
     <div className={`overflow-hidden relative ${skeletonClassName}`}>
@@ -21,12 +26,12 @@ const Image = ({
       )}
 
       <img
-        src={imageSrc}
+        src={hasError ? FALLBACK_IMAGE : src}
         alt={alt}
         loading="lazy"
         onLoad={() => setLoading(false)}
         onError={() => {
-          setImageSrc(FALLBACK_IMAGE);
+          setHasError(true);
           setLoading(false);
         }}
         className={`duration-300 ease-in-out transition-all

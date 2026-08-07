@@ -11,6 +11,8 @@ const useProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
+  const PRODUCTS_PER_PAGE = 10;
+  const [page, setPage] = useState(1);
 
   const fetchProducts = useCallback(async () => {
     try {
@@ -81,8 +83,22 @@ const useProducts = () => {
     setFilteredProducts(result);
   }, [products, debouncedSearch, category, sort]);
 
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch, category, sort]);
+
+  const totalProducts = filteredProducts.length;
+  const totalPages = Math.ceil(
+    totalProducts / PRODUCTS_PER_PAGE
+  );
+
+  const currentProducts = filteredProducts.slice(
+    (page - 1) * PRODUCTS_PER_PAGE,
+    page * PRODUCTS_PER_PAGE
+  );
+
   return {
-    products: filteredProducts,
+    products: currentProducts,
     loading,
     error,
     search,
@@ -91,6 +107,11 @@ const useProducts = () => {
     setCategory,
     sort,
     setSort,
+    page,
+    setPage,
+    totalPages,
+    totalProducts,
+    productsPerPage: PRODUCTS_PER_PAGE,
     fetchProducts,
   }
 };

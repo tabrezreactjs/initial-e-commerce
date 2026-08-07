@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Button from '../../common/Button/Button';
 import { Link } from 'react-router-dom';
 import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 import Image from '../../common/Image/Image';
+import Rating from '../Rating/Rating';
 
 const ProductCard = ({ product }) => {
   const [imageLoading, setImageLoading] = useState(true);
 
-  // Fake Rating (API doesn't provide ratings)
-  const rating = (4 + Math.random()).toFixed(1);
+  const rating = useMemo(() => (4 + Math.random()).toFixed(1), []);
 
   // Fake Discount (We'll replace later if backend provides it)
   const originalPrice = Math.round(product.price * 1.25);
@@ -81,12 +81,7 @@ const ProductCard = ({ product }) => {
 
         {/* Rating */}
         <div className="flex items-center gap-2 mb-1">
-          <span className="text-yellow-500">
-            ★★★★★
-          </span>
-          <span className="text-gray-500 text-sm">
-            {rating}
-          </span>
+          <Rating value={Number(rating)} />
         </div>
 
         {/* Price */}

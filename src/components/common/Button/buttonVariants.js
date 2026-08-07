@@ -5,20 +5,26 @@ export function buttonVariants({
   size = "md",
   fullWidth = false,
   disabled = false,
+  isIconOnly = false,
 }) {
   return clsx(
     "rounded-xl font-medium inline-flex items-center justify-center cursor-pointer select-none transition-all duration-300",
     {
       // Width
-      "w-full": fullWidth,
+      "w-full": fullWidth && !isIconOnly,
 
       // Disabled
       "opacity-50 cursor-not-allowed": disabled,
 
-      // Sizes
-      "h-9 text-sm px-4": size === "sm",
-      "h-11 text-base px-6": size === "md",
-      "h-14 text-lg px-8": size === "lg",
+      // Normal Sizes
+      "h-9 rounded-xl text-sm px-4": size === "sm" && !isIconOnly,
+      "h-11 rounded-xl text-base px-6": size === "md" && !isIconOnly,
+      "h-14 rounded-xl text-lg px-8": size === "lg" && !isIconOnly,
+
+      // Icon Only Sizes
+      "w-9 h-9 rounded-lg p-0": size === "sm" && isIconOnly,
+      "w-11 h-11 rounded-xl p-0": size === "md" && isIconOnly,
+      "w-14 h-14 rounded-2xl p-0": size === "lg" && isIconOnly,
 
       // Variants
       "bg-blue-600 text-white hover:bg-blue-700":
