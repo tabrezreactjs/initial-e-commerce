@@ -6,6 +6,7 @@ import AuthCard from '../../components/common/AuthCard/AuthCard'
 import Input from '../../components/common/Input/Input'
 import Button from '../../components/common/Button/Button'
 import toast from 'react-hot-toast'
+import { validation } from '../../utils/validation'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm();
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({ mode: "onChange" });
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -30,7 +31,7 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       toast.error(
-        error.response?.data?.message || 'Login Failed!'
+        error.response?.data?.message || 'Invalid email or password.'
       );
     }
   }
@@ -50,9 +51,7 @@ const Login = () => {
           type="email"
           placeholder="Enter email"
           error={errors.error?.message}
-          {...register('email', {
-            required: 'Email is required',
-          })}
+          {...register("email", validation.email)}
         />
 
         <Input
@@ -61,19 +60,14 @@ const Login = () => {
           type="password"
           placeholder="Enter password"
           error={errors.error?.message}
-          {...register('password', {
-            required: 'Password is required',
-            pattern: {
-              value: /^[A-Za-z0-9]+$/,
-              message: "Password can contain only letters and numbers",
-            },
-          })}
+          {...register("password", validation.password)}
         />
 
         <Button 
           type='submit'
           fullWidth
           loading={isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
           Login
         </Button>

@@ -6,6 +6,7 @@ import AuthCard from '../../components/common/AuthCard/AuthCard'
 import Input from '../../components/common/Input/Input'
 import Button from '../../components/common/Button/Button'
 import toast from 'react-hot-toast'
+import { validation } from '../../utils/validation'
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -13,8 +14,8 @@ const Signup = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm();
+    formState: { errors, isSubmitting, isValid },
+  } = useForm({ mode: "onChange" });
 
   const onSubmit = async (values) => {
     console.log(values);
@@ -35,7 +36,7 @@ const Signup = () => {
     } catch (error) {
       console.log(error);
       toast.error(
-        error.response?.data?.message || 'Signup failed!'
+        error.response?.data?.message || 'Signup failed. Please try again.'
       );
     }
   };
@@ -54,13 +55,7 @@ const Signup = () => {
           label="Name"
           placeholder="Full name"
           error={errors.name?.message}
-          {...register('name', {
-            required: 'Name is required',
-            minLength: {
-              value: 3,
-              message: 'Minimum 3 characters',
-            },
-          })}
+          {...register("name", validation.name)}
         />
 
         <Input
@@ -69,13 +64,7 @@ const Signup = () => {
           label="Email"
           placeholder="Enter email"
           error={errors.email?.message}
-          {...register('email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^\S+@\S+$/i,
-              message: 'Invalid email address',
-            },
-          })}
+          {...register("email", validation.email)}
         />
 
         <Input
@@ -84,23 +73,14 @@ const Signup = () => {
           type="password"
           placeholder="Enter password"
           error={errors.password?.message}
-          {...register('password', {
-            required: 'Password is required',
-            minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
-            },
-            pattern: {
-              value: /^[A-Za-z0-9]+$/,
-              message: "Password can contain only letters and numbers",
-            },
-          })}
+          {...register("password", validation.password)}
         />
 
         <Button 
           type='submit'
           fullWidth
           loading={isSubmitting}
+          disabled={!isValid || isSubmitting}
         >
           Create Account
         </Button>

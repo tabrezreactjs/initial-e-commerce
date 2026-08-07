@@ -10,7 +10,7 @@ export const API_ENDPOINTS = {
 
   PRODUCTS: {
     ALL: "/products",
-    BY_ID: (id) => `/products/${id}`,
+    DETAILS: (id) => `/products/${id}`,
   },
 
   CATEGORIES: {

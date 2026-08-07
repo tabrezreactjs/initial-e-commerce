@@ -1,18 +1,55 @@
 import React from 'react'
+import useProducts from '../../hooks/useProducts'
+import useCategories from '../../hooks/useCategories'
 import Container from '../../components/common/Container'
+import HeroBanner from './HeroBanner'
+import SearchBar from '../../components/product/SearchBar/SearchBar'
+import CategoryFilter from '../../components/product/CategoryFilter/CategoryFilter'
+import SortDropdown from '../../components/product/SortDropdown/SortDropdown'
+import ProductGrid from '../../components/product/ProductGrid/ProductGrid'
 
 const Home = () => {
+  const {
+    products,
+    loading,
+    error,
+    search,
+    setSearch,
+    category,
+    setCategory,
+    sort,
+    setSort,
+  } = useProducts();
+
+  const { categories } = useCategories();
+
   return (
     <Container>
-      <section className="w-full py-20">
-        <h1 className="text-5xl font-bold">
-          Welcome to ShopX
-        </h1>
+      <HeroBanner />
 
-        <p className="text-slate-600 mt-6">
-          Modern shopping experience built with React, Tailwind CSS and Platzi Fake Store API.
-        </p>
+      <section className="w-full flex flex-col gap-4 mb-8 md:justify-between md:items-center md:flex-row">
+        <SearchBar
+          value={search}
+          onChange={setSearch}
+        />
+        <div className="flex gap-4">
+          <CategoryFilter
+            categories={categories}
+            value={category}
+            onChange={setCategory}
+          />
+          <SortDropdown
+            value={sort}
+            onChange={setSort}
+          />
+        </div>
       </section>
+
+      <ProductGrid
+        products={products}
+        loading={loading}
+        error={error}
+      />
     </Container>
   )
 }

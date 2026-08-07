@@ -5,17 +5,11 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Button from '../components/common/Button/Button'
 import toast from 'react-hot-toast'
+import UserMenu from '../components/common/UserMenu/UserMenu'
 
 const Header = () => {
   const navigate = useNavigate();
-  const { user, logout } = useAuth();
-
-  const handleLogout = () => {
-    logout();
-    console.log("Logged out Success");
-    toast.success("Logged out successfully!");
-    navigate("/login");
-  };
+  const { user } = useAuth();
 
   return (
     <header className="w-full bg-white border-b z-50 shadow-sm sticky top-0">
@@ -34,15 +28,7 @@ const Header = () => {
               <FiShoppingCart size={22} />
             </Link>
 
-            <Link to="/profile">
-              <FiUser size={22} />
-            </Link>
-
-            <FiLogOut 
-              size={22} 
-              onClick={handleLogout}
-              className='cursor-pointer' 
-            />
+            <UserMenu />
           </div>
         ) : (
           <div className="flex items-center gap-3">

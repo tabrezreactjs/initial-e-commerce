@@ -24,7 +24,7 @@ export default function Input({
           "w-full bg-white border border-slate-300 rounded-xl px-4 py-3 outline-none transition-all",
           "focus:border-blue-500",
           "focus:border-blue-600 focus:ring-4 focus:ring-blue-100",
-          error && "border-red-500 focus:ring-red-100",
+          error ? "border-red-500 focus:border-red-500" : "border-gray-300 focus:border-blue-500",
           className
         )}
         {...props}
