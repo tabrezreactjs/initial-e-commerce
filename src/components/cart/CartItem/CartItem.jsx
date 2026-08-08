@@ -40,14 +40,12 @@ const CartItem = ({ product }) => {
 
         {/* Price */}
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-primary text-2xl font-bold">
+          <strong className="text-primary text-2xl font-bold">
             ${product.price}
-          </span>
-
-          <span className="text-gray-400 line-through">
+          </strong>
+          <strong className="text-gray-400 line-through">
             ${originalPrice}
-          </span>
-
+          </strong>
           <span className="text-green-600 text-sm font-semibold">
             {discount}% OFF
           </span>

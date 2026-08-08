@@ -8,8 +8,8 @@ import Image from '../../common/Image/Image';
 import Rating from '../Rating/Rating';
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useCart();
   const { user } = useAuth();
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   const [imageLoading, setImageLoading] = useState(true);
 
@@ -91,12 +91,12 @@ const ProductCard = ({ product }) => {
 
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-1 mt-auto">
-          <span className="text-primary text-2xl font-bold">
+          <strong className="text-primary text-2xl font-bold">
             ${product.price}
-          </span>
-          <span className="text-gray-400 line-through">
+          </strong>
+          <strong className="text-gray-400 line-through">
             ${originalPrice}
-          </span>
+          </strong>
           <span className="text-green-600 text-sm font-semibold">
             {discount}% OFF
           </span>
@@ -123,8 +123,7 @@ const ProductCard = ({ product }) => {
           >
             Add To Cart
           </Button>
-        )}
-        
+        )}        
       </div>
     </div>
   )

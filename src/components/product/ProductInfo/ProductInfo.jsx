@@ -7,9 +7,11 @@ import QuantitySelector from '../QuantitySelector/QuantitySelector'
 import Button from '../../common/Button/Button'
 import { FiHeart, FiShoppingCart } from 'react-icons/fi'
 import { FaBolt } from 'react-icons/fa'
+import { useAuth } from '../../../context/AuthContext'
 
 const ProductInfo = ({ product }) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const rating = useMemo(() => (4 + Math.random()).toFixed(1), []);
@@ -44,14 +46,12 @@ const ProductInfo = ({ product }) => {
 
       {/* Price */}
       <div className="flex items-baseline flex-wrap gap-3">
-        <span className="text-primary text-3xl font-bold">
+        <strong className="text-primary text-3xl font-bold">
           ${product.price}
-        </span>
-
-        <span className="text-gray-400 text-xl line-through">
+        </strong>
+        <strong className="text-gray-400 text-xl line-through">
           ${originalPrice}
-        </span>
-
+        </strong>
         <span className="bg-green-100 rounded text-green-700 text-sm font-semibold px-2 py-1">
           {discount}% OFF
         </span>
@@ -96,13 +96,23 @@ const ProductInfo = ({ product }) => {
 
       {/* Actions */}
       <div className="flex flex-col gap-2 xs:flex-row">
-        <Button
-          fullWidth
-          startIcon={<FiShoppingCart />}
-          onClick={() => addToCart(product, quantity)}
-        >
-          Add To Cart
-        </Button>
+        {user ? (
+          <Button
+            fullWidth
+            startIcon={<FiShoppingCart />}
+            onClick={() => addToCart(product, quantity)}
+          >
+            Add To Cart
+          </Button>
+        ) : (
+          <Button
+            fullWidth
+            startIcon={<FiShoppingCart />}
+            onClick={() => navigate("/login")}
+          >
+            Add To Cart
+          </Button>
+        )}
 
         <Button
           variant="success"
