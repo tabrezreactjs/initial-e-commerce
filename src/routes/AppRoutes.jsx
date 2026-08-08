@@ -5,6 +5,7 @@ import AuthLayout from '../layouts/AuthLayout'
 import Home from '../pages/Home/Home'
 import ProductDetails from '../pages/ProductDetails/ProductDetails'
 import Cart from '../pages/Cart/Cart'
+import Checkout from '../pages/Checkout/Checkout'
 import Profile from '../pages/Profile/Profile'
 import Login from '../pages/Login/Login'
 import Signup from '../pages/Signup/Signup'
@@ -25,6 +26,14 @@ const AppRoutes = () => {
                 <Cart />
               </ProtectedRoute>
             } 
+          />
+          <Route
+            path="/checkout"
+            element={
+              <ProtectedRoute>
+                <Checkout />
+              </ProtectedRoute>
+            }
           />
           <Route 
             path='/profile' 

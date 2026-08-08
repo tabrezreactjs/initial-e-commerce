@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { CartProvider } from './context/CartContext.jsx'
 import { Toaster } from 'react-hot-toast'
 import App from './App.jsx'
 import './global.css'
@@ -8,8 +9,10 @@ import './global.css'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
-      <App />
-      <Toaster position="top-right" />
+      <CartProvider>
+        <App />
+        <Toaster position="top-right" />
+      </CartProvider>
     </AuthProvider>
   </StrictMode>,
 )

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 
 /* Scan all legacy + App Router sources for class names */
 @source "../**/*.{js,jsx,ts,tsx}";
@@ -11,6 +11,17 @@
 }
 
 @theme inline {
+  /* =========================== Breakpoints =========================== */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+  --breakpoint-3xl: 1920px;
+
+
+  /* =========================== Animations =========================== */
   --animate-loader-bar: loader-bar-animation 2s ease-in-out infinite;
 
   @keyframes loader-bar-animation {
@@ -43,15 +54,28 @@ html {
   text-box: trim-both;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.5);
-  @apply ring-0! ring-offset-0!;
+  @apply leading-tight! ring-0! ring-offset-0!;
 }
 
 body {
+  font-family: 'Nunito', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   text-box: trim-both;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   @apply leading-tight!;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+button {
+  font-family: 'Saira', ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 a {

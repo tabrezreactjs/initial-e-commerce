@@ -1,4 +1,6 @@
 import React, { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useCart } from '../../../context/CartContext'
 import Rating from '../Rating/Rating'
 import StockBadge from '../StockBadge/StockBadge'
 import QuantitySelector from '../QuantitySelector/QuantitySelector'
@@ -7,17 +9,20 @@ import { FiHeart, FiShoppingCart } from 'react-icons/fi'
 import { FaBolt } from 'react-icons/fa'
 
 const ProductInfo = ({ product }) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
-
   const rating = useMemo(() => (4 + Math.random()).toFixed(1), []);
-
   const reviews = useMemo(() => Math.floor(Math.random() * 500) + 50, []);
-
   const originalPrice = Math.round(product.price * 1.25);
-
   const discount = Math.round(
     ((originalPrice - product.price) / originalPrice) * 100
   );
+
+  const handleBuyNow = () => {
+    addToCart(product, quantity);
+    navigate('/cart');
+  };
 
   return (
     <div className="w-full flex flex-col gap-2">
@@ -81,8 +86,8 @@ const ProductInfo = ({ product }) => {
         </div>
 
         <Button
+          variant="warning"
           size="sm"
-          variant="outline"
           isIconOnly
         >
           <FiHeart />
@@ -90,18 +95,20 @@ const ProductInfo = ({ product }) => {
       </div>
 
       {/* Actions */}
-      <div className="flex flex-col gap-3 sm:flex-row">
+      <div className="flex flex-col gap-2 xs:flex-row">
         <Button
           fullWidth
-          startContent={<FiShoppingCart />}
+          startIcon={<FiShoppingCart />}
+          onClick={() => addToCart(product, quantity)}
         >
           Add To Cart
         </Button>
 
         <Button
+          variant="success"
           fullWidth
-          variant="warning"
-          startContent={<FaBolt />}
+          startIcon={<FaBolt />}
+          onClick={handleBuyNow}
         >
           Buy Now
         </Button>

@@ -29,6 +29,7 @@ export default function Button({
         }),
         className
       )}
+      style={{ textBox: 'trim-both' }}
       {...props}
     >
       {loading ? (

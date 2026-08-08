@@ -8,7 +8,7 @@ export function buttonVariants({
   isIconOnly = false,
 }) {
   return clsx(
-    "rounded-xl font-medium inline-flex items-center justify-center cursor-pointer select-none transition-all duration-300",
+    "rounded-xl font-medium leading-tight! inline-flex items-center justify-center cursor-pointer select-none duration-300 transition-all hover:-translate-y-0.5",
     {
       // Width
       "w-full": fullWidth && !isIconOnly,
@@ -17,9 +17,9 @@ export function buttonVariants({
       "opacity-50 cursor-not-allowed": disabled,
 
       // Normal Sizes
-      "h-9 rounded-xl text-sm px-4": size === "sm" && !isIconOnly,
-      "h-11 rounded-xl text-base px-6": size === "md" && !isIconOnly,
-      "h-14 rounded-xl text-lg px-8": size === "lg" && !isIconOnly,
+      "h-9 rounded-xl text-sm gap-2 px-4": size === "sm" && !isIconOnly,
+      "h-11 rounded-xl text-base gap-2.5 px-6": size === "md" && !isIconOnly,
+      "h-14 rounded-xl text-lg gap-3 px-8": size === "lg" && !isIconOnly,
 
       // Icon Only Sizes
       "w-9 h-9 rounded-lg p-0": size === "sm" && isIconOnly,

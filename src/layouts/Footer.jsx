@@ -9,7 +9,7 @@ const Footer = () => {
         </h2>
 
         <p className="text-slate-400 mt-3">
-          Build with React, Vite and Tailwind CSS.
+          Discover thousands of amazing products.
         </p>
       </div>
     </footer>

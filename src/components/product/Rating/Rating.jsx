@@ -9,16 +9,16 @@ const Rating = ({
   const hasHalfStar = value % 1 >= 0.5;
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-1.5">
       <div className="text-yellow-400 flex">
         {Array.from({ length: fullStars }).map((_, index) => (
-          <FaStar key={index} />
+          <FaStar key={index} size={14} />
         ))}
 
-        {hasHalfStar && <FaStarHalfAlt/>}
+        {hasHalfStar && <FaStarHalfAlt size={14} />}
       </div>
 
-      <span className="text-gray-600 text-sm">
+      <span className="text-gray-600 text-xs">
         {value} ({reviews} Reviews)
       </span>
     </div>

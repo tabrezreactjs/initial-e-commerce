@@ -31,7 +31,7 @@ const ProductDetails = () => {
   return (
     <Container>
       <div className="w-full flex items-start flex-col gap-8 md:flex-row">
-        <div className='w-full max-w-80 shrink-0 flex flex-col gap-2 lg:max-w-96'>
+        <div className='w-full shrink-0 flex flex-col gap-2 md:max-w-80 lg:max-w-96'>
           <h1 className="text-2xl font-bold">
             {product.title}
           </h1>

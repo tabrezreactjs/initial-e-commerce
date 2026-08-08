@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ImageSkeleton from "./ImageSkeleton";
 
-const FALLBACK_IMAGE = "https://placehold.co/600x600?text=No+Image";
+const FALLBACK_IMAGE = "https://placehold.co/640x480?text=No+Image";
 
 const Image = ({
   src,
   alt,
   className = "",
   skeletonClassName = "",
+  lazy = true,
 }) => {
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
@@ -26,9 +27,10 @@ const Image = ({
       )}
 
       <img
+        key={src}
         src={hasError ? FALLBACK_IMAGE : src}
         alt={alt}
-        loading="lazy"
+        loading={lazy ? "lazy" : "eager"}
         onLoad={() => setLoading(false)}
         onError={() => {
           setHasError(true);

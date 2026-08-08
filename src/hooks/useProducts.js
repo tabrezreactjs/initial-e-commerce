@@ -11,7 +11,7 @@ const useProducts = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("");
   const [sort, setSort] = useState("");
-  const PRODUCTS_PER_PAGE = 10;
+  const PRODUCTS_PER_PAGE = 25;
   const [page, setPage] = useState(1);
 
   const fetchProducts = useCallback(async () => {

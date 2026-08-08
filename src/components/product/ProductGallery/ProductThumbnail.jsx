@@ -18,8 +18,10 @@ const ProductThumbnail = ({
     >
       <Image
         src={image}
-        alt="thumbnail"
+        alt="Product thumbnail"
+        lazy={true}
         className="w-full h-full object-cover"
+        skeletonClassName="w-full h-full"
       />
     </button>
   )

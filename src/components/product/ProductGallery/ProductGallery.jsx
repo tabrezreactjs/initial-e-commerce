@@ -3,11 +3,11 @@ import Image from '../../common/Image/Image';
 import ProductThumbnail from './ProductThumbnail';
 
 const ProductGallery = ({ images = [], title }) => {
-  const [selectedImage, setSelectedImage] = useState(images[0] || "");
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
-    setSelectedImage(images[0] || "");
-  }, [images]);
+    setSelectedIndex(0);
+  }, [images.length]);
 
   if (!images.length) {
     return (
@@ -17,28 +17,31 @@ const ProductGallery = ({ images = [], title }) => {
     );
   }
 
+  const selectedImage = images[selectedIndex] || images[0];
+
   return (
-    <div className="flex flex-col-reverse gap-4 lg:flex-row">
+    <div className="flex flex-col-reverse gap-4 xs:flex-row md:flex-col-reverse lg:flex-row">
       {/* Thumbnails */}
-      <div className="flex gap-3 overflow-x-auto lg:flex-col lg:overflow-hidden">
+      <div className="flex flex-row gap-3 overflow-x-auto xs:flex-col md:flex-row lg:flex-col lg:overflow-hidden">
         {images.map((image, index) => (
           <ProductThumbnail
             key={`${image}-${index}`}
             image={image}
-            active={selectedImage === image}
+            active={selectedIndex === index}
             onClick={() => {
               console.log("Clicked:", image);
-              setSelectedImage(image);
+              setSelectedIndex(index);
             }}
           />
         ))}
       </div>
 
       {/* Main Image */}
-      <div className="bg-white border border-gray-200 rounded-2xl aspect-square flex-1 overflow-hidden relative group">
+      <div className="bg-white border border-gray-200 rounded-2xl aspect-square flex-1 overflow-hidden relative group xs:max-w-96">
         <Image
           src={selectedImage}
           alt={title}
+          lazy={false}
           className="w-full h-full object-cover duration-500 transition-transform group-hover:scale-110"
           skeletonClassName="w-full h-full"
         />

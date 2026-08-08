@@ -1,11 +1,16 @@
 import React, { useMemo, useState } from 'react'
+import { useCart } from '../../../context/CartContext';
+import { useAuth } from '../../../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../common/Button/Button';
-import { Link } from 'react-router-dom';
 import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 import Image from '../../common/Image/Image';
 import Rating from '../Rating/Rating';
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [imageLoading, setImageLoading] = useState(true);
 
   const rating = useMemo(() => (4 + Math.random()).toFixed(1), []);
@@ -66,7 +71,7 @@ const ProductCard = ({ product }) => {
       </Link>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col gap-1 p-4">
+      <div className="flex-1 flex flex-col gap-1 p-3 sm:p-4">
         {/* Category */}
         <p className="text-gray-500 text-sm font-medium uppercase tracking-wide line-clamp-2">
           {product.category?.name}
@@ -98,14 +103,28 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Button */}
-        <Button
-          fullWidth
-          size='sm'
-          startContent={<FiShoppingCart />}
-          className="duration-300 transition-all group-hover:scale-[1.02]"
-        >
-          Add To Cart
-        </Button>
+        {user ? (
+          <Button
+            fullWidth
+            size='sm'
+            startIcon={<FiShoppingCart />}
+            onClick={() => addToCart(product)}
+            className="duration-300 transition-all group-hover:scale-[1.02]"
+          >
+            Add To Cart
+          </Button>
+        ) : (
+          <Button
+            fullWidth
+            size='sm'
+            startIcon={<FiShoppingCart />}
+            onClick={() => navigate("/login")}
+            className="duration-300 transition-all group-hover:scale-[1.02]"
+          >
+            Add To Cart
+          </Button>
+        )}
+        
       </div>
     </div>
   )

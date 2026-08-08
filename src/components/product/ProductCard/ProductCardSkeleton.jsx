@@ -17,7 +17,7 @@ const ProductCardSkeleton = () => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 flex flex-col gap-1 p-4">
+      <div className="flex-1 flex flex-col gap-1 p-3 sm:p-4">
         {/* Category */}
         <Skeleton className="w-24 h-5" />
 
