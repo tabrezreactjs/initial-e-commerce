@@ -51,11 +51,11 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-  storage.remove(STORAGE_KEYS.ACCESS_TOKEN);
-  storage.remove(STORAGE_KEYS.USER);
+    storage.remove(STORAGE_KEYS.ACCESS_TOKEN);
+    storage.remove(STORAGE_KEYS.USER);
 
-  setUser(null);
-}
+    setUser(null);
+  }
 
   return (
     <AuthContext.Provider
