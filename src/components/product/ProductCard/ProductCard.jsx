@@ -90,7 +90,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Price */}
-        <div className="flex items-baseline gap-2 mb-1 mt-auto">
+        <div className="flex items-baseline flex-wrap gap-2 mb-1 mt-auto">
           <strong className="text-primary text-2xl font-bold">
             ${product.price}
           </strong>

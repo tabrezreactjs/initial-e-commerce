@@ -39,7 +39,7 @@ const CartItem = ({ product }) => {
         </p>
 
         {/* Price */}
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-baseline flex-wrap gap-3 mb-2">
           <strong className="text-primary text-2xl font-bold">
             ${product.price}
           </strong>
